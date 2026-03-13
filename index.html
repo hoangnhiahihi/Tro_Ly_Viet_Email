@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trợ Lý Viết Email Chăm Sóc Khách Hàng</title>
+    <link rel="stylesheet" href="email_assistant.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Trợ Lý Viết Email</h1>
+            <p>Công cụ chuyên nghiệp cho chăm sóc khách hàng & bán hàng</p>
+        </div>
+
+        <div class="content">
+          
+            <form id="emailForm">
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="customerName">👤 Tên Khách Hàng *</label>
+                        <input 
+                            type="text" 
+                            id="customerName" 
+                            name="customerName" 
+                            placeholder="Nhập tên khách hàng (chỉ chữ)"
+                            required
+                        >
+                        <div class="error-message" id="nameError">⚠️ Tên khách hàng chỉ được chứa ký tự chữ và khoảng trắng!</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productService">🎁 Tên Sản Phẩm/Dịch Vụ *</label>
+                        <input 
+                            type="text" 
+                            id="productService" 
+                            name="productService" 
+                            placeholder="VD: Gói bảo hiểm cao cấp"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="gender">👥 Giới tính *</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">-- Chọn giới tính --</option>
+                            <option value="nam">Nam</option>
+                            <option value="nữ">Nữ</option>
+                            <option value="khác">Khác</option>
+                        </select>
+                    </div>
+
+            
+                </div>
+
+                <div class="form-group">
+                    <label for="emailType">📝 Nội dung Email Gồm *</label>
+                    <select id="emailType" name="emailType" required>
+                        <option value="">-- Chọn loại nội dung email --</option>
+                        <option value="introduce">🆕 Giới thiệu sản phẩm mới</option>
+                        <option value="thanks">❤️ Cảm ơn khách hàng</option>
+                        <option value="reminder">⏰ Nhắc nhở thanh toán</option>
+                        <option value="complaint">🔧 Giải quyết khiếu nại</option>
+                        <option value="custom"> Khác </option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="customEmailDiv" style="display: none;">
+                    <label for="customEmailContent">📝 Nội dung Email  *</label>
+                    <input 
+                        type="text" 
+                        id="customEmailContent" 
+                        name="customEmailContent" 
+                        placeholder="Nhập nội dung email theo ý của bạn"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="detailInfo">📋 Thông tin cụ thể cần truyền tải *</label>
+                    <textarea 
+                        id="detailInfo" 
+                        name="detailInfo" 
+                        placeholder="Viết chi tiết nội dung cần gửi (ưu điểm sản phẩm, điều khoản thanh toán, lời xin lỗi, v.v.)"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="resetForm()">🔄 Làm Mới</button>
+                    <button type="button" class="btn btn-primary" id="createDraftBtn" onclick="generateEmail()">✨ Tạo Email Bản Nháp</button>
+                </div>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                ✅ Email bản nháp đã được tạo thành công! Bạn có thể sao chép nội dung để sử dụng.
+            </div>
+
+            <div id="emailPreview" style="display: none; margin-top: 40px; padding: 25px; background: white; border-radius: 10px; border: 2px solid #d4a574;">
+                <h3 style="color: #d4a574; margin-bottom: 15px;">📧 Xem Trước Email:</h3>
+                <div id="emailContent" style="color: #5a4a3a; line-height: 1.4; font-size: 14px; white-space: pre-wrap;">
+                </div>
+                <button type="button" class="btn btn-primary" style="margin-top: 20px;" onclick="copyToClipboard()">📋 Sao Chép Nội Dung</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">⚠️ Lỗi Nhập Liệu</div>
+            <div class="modal-message" id="errorMessage"></div>
+            <div class="modal-input" style="display: none;" id="modalInput"></div>
+            <div class="modal-buttons">
+                <button type="button" class="modal-btn modal-btn-cancel" onclick="closeErrorModal()">Đóng</button>
+                <button type="button" class="modal-btn modal-btn-confirm" id="confirmBtn" onclick="confirmInput()" style="display: none;">Nhập Lại</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="email_assistant.js"></script>
+</body>
+</html>
