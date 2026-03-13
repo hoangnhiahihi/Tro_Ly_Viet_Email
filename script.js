@@ -3,7 +3,7 @@
 // ============================================
 
 // API KEY (chỉ dùng cho mục đích học tập)
-const API_KEY = "AIzaSyBBhDaGp0GDuufBVpeSyzzpvAzHL7_P4n4";
+const API_KEY = "AIzaSyB-WtkPTUzu6gMC-ZWXAopVecCGVR5P-6s";
 
 
 // ============================================
