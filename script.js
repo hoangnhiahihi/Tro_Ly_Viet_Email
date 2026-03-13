@@ -3,8 +3,8 @@
 // ============================================
 
 // API KEY (chỉ dùng cho mục đích học tập)
-const API_KEY = "AIzaSyB-WtkPTUzu6gMC-ZWXAopVecCGVR5P-6s";
 
+});
 
 // ============================================
 // Kiểm tra tên khách hàng chỉ chứa chữ
@@ -215,22 +215,17 @@ Email:
         document.getElementById('emailPreview').style.display = 'block';
 
 
-        const response = await fetch(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    contents: [
-                        {
-                            parts: [{ text: prompt }]
-                        }
-                    ]
-                })
-            }
-        );
+        const response = await fetch("/api/generate", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ prompt })
+});
+
+const data = await response.json();
+
+const aiText = data.candidates[0].content.parts[0].text;
 
 
         if (!response.ok) {
